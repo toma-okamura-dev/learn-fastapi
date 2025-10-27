@@ -1,13 +1,13 @@
+from typing import Union
+
 from fastapi import FastAPI
-from enum import Enum
 
 app = FastAPI()
 
-class ModelName(str, Enum):  
-    alexnet = "a"
-    resnet = "b"
-    lenet = "c"
 
-@app.get("/models/{model_name}")
-async def get_model(model_name: ModelName):
-    return {"model_name": model_name}
+@app.get("/items/{a}") # a はパスパラメータです
+async def read_user_item(
+    a: str, b: str, c: int = 0, d: int | None = None #　bはクエリパラメータで、cはオプショナルなクエリパラメータです
+):
+    item = {"a": a, "b": b, "c": c, "d": d}
+    return item
